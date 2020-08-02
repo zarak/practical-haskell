@@ -23,4 +23,5 @@ library
   hs-source-dirs:      src
   default-language:    Haskell2010
   exposed-modules:     Chapter2.Section2.Example
+  exposed-modules:     Chapter2.SimpleFunctions
   ghc-options:         -Wall
