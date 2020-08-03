@@ -26,3 +26,22 @@ maxmin list = let h = head list
                       where t = maxmin (tail list)
                             t_max = fst t
                             t_min = snd t
+
+
+
+-- View Patterns examples
+data Client = GovOrg String 
+  | Company     String Integer Person String 
+  | Individual  Person Bool
+  deriving Show
+
+data Person = String String
+    deriving Show
+
+clientName :: Client -> String
+clientName client =
+    case client of
+      GovOrg name -> name
+      Company name _ _ _ -> name
+      Individual (Person first last) 
+
