@@ -38,10 +38,28 @@ data Client = GovOrg String
 data Person = String String
     deriving Show
 
-clientName :: Client -> String
-clientName client =
-    case client of
-      GovOrg name -> name
-      Company name _ _ _ -> name
-      Individual (Person first last) 
+--clientName :: Client -> String
+--clientName client =
+    --case client of
+      --GovOrg name -> name
+      --Company name _ _ _ -> name
+      --Individual (Person first last) 
 
+
+data ClientR = GovOrgR { clientRName :: String }
+             | CompanyR { clientRName :: String 
+                        , companyId :: Integer 
+                        , person :: PersonR 
+                        , duty :: String }
+             | IndividualR { person :: PersonR }
+             deriving Show
+
+data PersonR = PersonR { firstName :: String
+                       , lastName :: String
+                       } deriving Show
+
+
+greet :: ClientR -> String
+greet IndividualR { person = PersonR { firstName = fn } } = "Hi, " ++ fn
+greet CompanyR { clientRName = c } = "Hi, " ++ c
+greet GovOrgR { } = "Welcome"
