@@ -1,4 +1,8 @@
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE RecordWildCards #-}
 module Chapter2.SimpleFunctions where
+
+import Data.Char
 
 
 firstOrEmpty :: [String] -> String
@@ -60,6 +64,21 @@ data PersonR = PersonR { firstName :: String
 
 
 greet :: ClientR -> String
-greet IndividualR { person = PersonR { firstName = fn } } = "Hi, " ++ fn
-greet CompanyR { clientRName = c } = "Hi, " ++ c
+--greet IndividualR { person = PersonR { firstName = fn } } = "Hi, " ++ fn
+--greet CompanyR { clientRName = c } = "Hi, " ++ c
+--greet GovOrgR { } = "Welcome"
+--
+-- WITH NamedFieldPuns ENABLED:
+greet IndividualR { person = PersonR { firstName } } = "Hi, " ++ firstName
+greet CompanyR { clientRName } = "Hi, " ++ clientRName
 greet GovOrgR { } = "Welcome"
+
+greet IndividualR { person = PersonR { .. } } = "Hi, " ++ firstName ++ " " ++ lastName
+greet CompanyR { .. } = "Hi, " ++ clientRName
+greet GovOrgR {} = "Welcome"
+
+nameInCapitals :: PersonR -> PersonR
+nameInCapitals p@(PersonR { firstName = initial:rest }) =
+    let newName = (toUpper initial):rest
+        in p { firstName = newName }
+nameInCapitals p@(PersonR { firstName = "" }) = p
