@@ -1,5 +1,6 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
+    {-# LANGUAGE ParallelListComp #-}
 module Chapter2.SimpleFunctions where
 
 import Data.Char
