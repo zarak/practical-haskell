@@ -40,15 +40,18 @@ data Client = GovOrg String
   | Individual  Person Bool
   deriving Show
 
-data Person = String String
+data Gender = Male | Female | Unknown
     deriving Show
 
---clientName :: Client -> String
---clientName client =
-    --case client of
-      --GovOrg name -> name
-      --Company name _ _ _ -> name
-      --Individual (Person first last) 
+data Person = Person String String Gender
+    deriving Show
+
+clientName :: Client -> String
+clientName client =
+    case client of
+      GovOrg name -> name
+      Company name _ _ _ -> name
+      Individual (Person fNm lNm _) _ -> fNm ++ " " ++ lNm 
 
 
 data ClientR = GovOrgR { clientRName :: String }
