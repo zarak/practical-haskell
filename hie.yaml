@@ -1,0 +1,6 @@
+cradle:
+  cabal:
+    - path: "./chapter2/"
+      component: "lib:chapter2"
+    - path: "./chapter4/"
+      component: "lib:chapter4"
